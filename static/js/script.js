@@ -1,8 +1,11 @@
-var form = document.getElementById("visualizeBtn");
+// var form = document.getElementById("visualizeBtn");
 
 function visualize(event) {   
     event.preventDefault();
     var data = document.forms.inputForm.data.value;
+    if(data.length == 0){
+        return;
+    }
     var obj = JSON.parse(data);
     var headers = obj["headers"];
     var rows = obj["values"];
@@ -10,7 +13,6 @@ function visualize(event) {
 } 
 
 function buildTable(headers, data){
-    console.log(data.length);
     var container = document.getElementById("table-container");
     container.innerHTML = '';
 
@@ -44,4 +46,4 @@ function buildTable(headers, data){
     table.append(tbody);
 }
 
-form.addEventListener('submit', visualize);
+// form.addEventListener('submit', visualize);

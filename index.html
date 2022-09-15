@@ -7,130 +7,52 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hind">
-    <link href="https: //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
-    <div class="d-flex flex-row justify-content-center col-6">
-        <form name="inputForm" id="visualizeBtn" class="container-fluid">
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Input</label>
-              <textarea name="data" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="d-flex flex-row justify-content-center mt-2">
-                <button class="btn btn-primary" onclick="visualize(event)">Visualize</button>
-            </div>
-        </form>
-    </div>
-    <br><br>
-    <hr>
+    <!-- Page container -->
+    <div class="container-fluid" style="">
+        <!-- Form container -->
+        <div class="d-flex flex-row justify-content-center my-5 mx-4">
+            <div class="container-fluid">
+                <form name="inputForm" id="visualizeBtn" class="">
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Output</label>
+                      <textarea name="data" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center mt-2">
+                        <button class="btn btn-outline-primary btn-lg col-2 mx-2" onclick="visualize(event)">Visualize</button>
+                        <button class="btn btn-outline-warning btn-lg col-2" id="clearBtn" onclick="clearInputBox()">Clear</button>
 
-
-    <div class="container-fluid">
-        <div class="card shadow">
-            <div class="card-header">
-                Activities
+                    </div>
+                </form>
             </div>
-            <div class="card-body" id="table-container">
-                <table class="table table-striped">
-                    <thead>
-                      <tr id="tableHeaders">
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-
-
         </div>
+
+        <!-- Table Container -->
+            <div class="card shadow mx-4">
+                <div class="card-header">
+                    Output
+                </div>
+                <div class="card-body" id="table-container">
+                </div>
+            </div>
 
     
     </div>
+
     <!-- End page container -->
     <script>
-      function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
-      }
+        var form = document.getElementById("clearBtn");
 
-      function openMail() {
-        window.open("mailto:xyz@abc.com");
-      }
+        function clearInputBox(){
+            event.preventDefault();
 
-      function sendEmail() {
-        event.preventDefault();
-        let xhr = new XMLHttpRequest();
-        let url = 'https://iifainwr5h.execute-api.us-east-1.amazonaws.com/default/sendEmail';
-        xhr.open('POST', url, true);
-        xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4) {
-            if (xhr.status == 200 || xhr.status == 201) { // Ok or Created
-              // let data = JSON.parse(xhr.responseText);
-              document.emailForm.reset();
-              document.getElementById("messageSentBanner").classList.remove("hideMessageSentBanner");
-              setTimeout(function() {
-                document.getElementById("messageSentBanner").classList.add("hideMessageSentBanner");
-              }, 3000);
-            } else {
-              console.error("POST request failed.");
-              console.error(xhr.status + ': ' + xhr.responseText);
-            }
-          }
-        };
-        // JavaScript data (object)
-        let userObject = {
-          name: document.emailForm.senderName.value,
-          email: document.emailForm.senderEmail.value,
-          message: document.emailForm.senderMessage.value
-        };
-        let userObjectJson = JSON.stringify(userObject); // Convert JS object to JSON string
-        // Pass JSON as request body
-        xhr.send(userObjectJson);
-      }
-      var projectsHidden = true;
-
-      function toggleProjects() {
-        let divs = document.querySelectorAll('.extraProject');
-        let projects = document.getElementsByClassName("extraProject");
-        if (projectsHidden) {
-          projectsHidden = false;
-          for (var i = 0; i < divs.length; i++) {
-            divs[i].classList.remove('hidden');
-          }
-          document.querySelector('#showMoreProjectBtn').innerHTML = 'show less';
-        } else {
-          projectsHidden = true;
-          for (var i = 0; i < divs.length; i++) {
-            divs[i].classList.add('hidden');
-          }
-          document.querySelector('#showMoreProjectBtn').innerHTML = 'show more';
+            console.log("clearing form")
+            document.forms.inputForm.reset();
         }
-      }
+        form.addEventListener('submit', clearInputBox);
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="static/js/script.js"></script>
