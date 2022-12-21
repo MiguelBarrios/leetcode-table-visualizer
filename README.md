@@ -1,2 +1,2 @@
 # leetcode-table-visualizer
-Website to visualize LeetCode SQL Tables
+app to visualize LeetCode SQL Tables
